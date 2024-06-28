@@ -3,6 +3,7 @@ import ReactTextareaAutosize from "react-textarea-autosize";
 import {ChangeEvent, FormEvent, useState} from "react";
 import {FormData} from "@/types/blog";
 import {useSession} from "next-auth/react";
+import axios from "axios";
 
 const inputClass = 'w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300';
 
@@ -23,9 +24,14 @@ const FormNewPost = () => {
             [name]: value,
         });
     };
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        console.log(formData)
+        // console.log(formData)
+        try {
+            const response = await axios.post('api/posts', formData)
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 
