@@ -2,6 +2,7 @@
 import ReactTextareaAutosize from "react-textarea-autosize";
 import {ChangeEvent, FormEvent, useState} from "react";
 import {FormData} from "@/types/blog";
+import {useSession} from "next-auth/react";
 
 const inputClass = 'w-full py-2 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-300';
 
@@ -10,6 +11,9 @@ const FormNewPost = () => {
         title: '',
         content: '',
     })
+
+    const {data}= useSession();
+    console.log(data?.user);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         e.preventDefault();
